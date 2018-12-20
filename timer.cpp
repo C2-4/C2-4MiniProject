@@ -2,17 +2,16 @@
 #include "std_msgs/String.h"
 #include <iostream>
 #include <sstream>
-#include "std_msgs/Float32.h"
 
 float round(float count){
-  float value = (int)(count * 100 + .5);
-  return (float)value / 1000;
+  float value = (int)(count * 100 + 0.5);
+  return (float)value / 100;
  }
 
 int main(int argc, char **argv)
 {
   using namespace std;
-  ros::init(argc, argv, "mini_music");
+  ros::init(argc, argv, "timer");
   ros::NodeHandle n;
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1);
   ros::Rate loop_rate(10);
@@ -25,14 +24,14 @@ int main(int argc, char **argv)
     ss << round(count);
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    ROS_INFO("Published: %s", msg.data.c_str());
 
     chatter_pub.publish(msg);
 
     ros::spinOnce();
 
     loop_rate.sleep();
-    count = count + 1;
+    count = count + 0.1;
   }
 
 
