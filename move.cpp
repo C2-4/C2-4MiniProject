@@ -17,14 +17,14 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
   std::stringstream ss;
   ss << msg->data.c_str();
   ss >> timerf;
-  cout << timerf << endl;
+  cout << "Received: " << timerf << endl;
   ros::Rate rate(50);
   int times[]={3, 6, 9, 12, 15, 18, 21, 24};
   int k = timerf/3 - 1;
-  if(timerf == times[k] && remainderf(timerf, 3)==0){
+  if(timerf == times[k]){
     float angVelocity[]={M_PI/4, 0, M_PI/4, 0, -M_PI/4, 0, M_PI/4, 0};
     float linVelocity[]={0, 0.6, 0, 0.5, 0, 0.5, 0, 0.6};
-    int Loops[]={102, 100, 75, 80, 65, 80, 75, 100};
+    int Loops[]={100, 100, 75, 80, 65, 80, 75, 100};
     double n;
 
     base_cmd.linear.x = linVelocity[k];
@@ -43,7 +43,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
 int main(int argc, char **argv)
 {
 
-  ros::init(argc, argv, "mini_move");
+  ros::init(argc, argv, "move");
   ros::NodeHandle n;
   ros::Subscriber sub = n.subscribe("chatter", 1, chatterCallback);
   ros::spin();
