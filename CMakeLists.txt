@@ -94,13 +94,13 @@ include_directories(
 #  ${catkin_LIBRARIES}
 #)
 
-add_executable(mini_move src/mini_move.cpp)
-target_link_libraries(mini_move
+add_executable(move src/move.cpp)
+target_link_libraries(move
   ${catkin_LIBRARIES}
 )
 
-add_executable(mini_timer src/mini_timer.cpp)
-target_link_libraries(mini_timer
+add_executable(timer src/timer.cpp)
+target_link_libraries(timer
   ${catkin_LIBRARIES}
 )
 
